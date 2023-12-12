@@ -9,10 +9,7 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +40,10 @@ public class Main {
         builder.run();
         os.close();
 
+        File outputFile = new File("src/main/java/org/example/deneme.pdf");
+        try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+            fos.write(os.toByteArray());
+        }
         return os.toByteArray();
     }
 
